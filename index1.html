@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leto — объявления: купи и продай</title>
+<style>
+:root{--bg:#fff8ef;--card:#fff;--tx:#2b2118;--mut:#7a6a5a;--ac:#ff7a3d;--ac2:#14b8a6;--ln:#0001;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17120e;--card:#241c16;--tx:#fff3e6;--mut:#b8a591;--ln:#fff2}}
+:root[data-theme="dark"]{--bg:#17120e;--card:#241c16;--tx:#fff3e6;--mut:#b8a591;--ln:#fff2}
+html{scroll-behavior:smooth;scroll-padding-top:calc(76px + env(safe-area-inset-top,0px));height:100%}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden;min-height:100%}
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--ac),var(--ac2));z-index:99}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 5%;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 80%,transparent);transition:.3s}
+header.s{padding:8px 5%;box-shadow:0 4px 24px #0002}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.5rem;letter-spacing:.02em;text-decoration:none;color:var(--tx)}
+.logo svg{width:30px;height:30px;animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+nav a{color:var(--mut);text-decoration:none;margin:0 12px;transition:.2s}nav a:hover{color:var(--ac)}
+.btn{border:0;cursor:pointer;font:inherit;font-weight:600;padding:11px 20px;border-radius:99px;color:#fff;background:linear-gradient(135deg,var(--ac),#ff4d6d);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 8px 22px #ff7a3d55}
+.btn.o{background:none;color:var(--tx);border:2px solid var(--ac2)}
+.btn.o:hover{background:var(--ac2);color:#fff;box-shadow:0 8px 22px #14b8a655}
+.hero{padding:56px 5% 80px;position:relative;overflow:hidden}.hero::before{content:"";position:absolute;inset:0;background:url(photos/hero.jpg) center/cover;opacity:.18}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;animation:fl 8s ease-in-out infinite alternate}
+.b1{width:320px;height:320px;background:#ffb347;top:4%;left:4%}.b2{width:360px;height:360px;background:var(--ac2);bottom:2%;right:4%;animation-delay:-3s}.b3{width:220px;height:220px;background:#ff4d6d;top:40%;left:45%;animation-delay:-5s}
+@keyframes fl{to{transform:translate(30px,-40px) scale(1.15)}}
+.hw{position:relative;z-index:1;max-width:1240px;margin:auto;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero .sb{margin:0}.rc{margin-top:14px;min-height:24px;font-weight:600;color:var(--ac2)}.rc a{color:var(--ac);cursor:pointer;margin-left:8px;text-decoration:underline}
+.qc{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.tag{display:inline-block;background:var(--card);padding:7px 16px;border-radius:99px;font-size:.9rem;color:var(--mut);margin-bottom:16px;box-shadow:0 4px 14px #0001}
+.hc{position:relative;height:520px}
+.fc{position:absolute;width:215px;background:var(--card);border-radius:22px;overflow:hidden;box-shadow:0 22px 50px #0003;animation:fl2 6s ease-in-out infinite alternate}
+.fc .pic{height:130px}.fc .pic svg{width:76px;height:76px}.fc .bd{padding:12px}.fc .price{font-size:1.1rem}.fc h3{font-size:.95rem}.fc p{margin:0}
+.fc:nth-child(1){top:0;left:4%;rotate:-6deg}.fc:nth-child(2){top:70px;right:0;rotate:5deg;animation-delay:-2s}.fc:nth-child(3){bottom:0;left:24%;rotate:-2deg;animation-delay:-4s}
+@keyframes fl2{to{translate:0 -16px}}
+.mq{overflow:hidden;background:linear-gradient(90deg,var(--ac),#ff4d6d,var(--ac2));color:#fff;padding:14px 0;rotate:-1deg;margin:-30px -3% 20px;position:relative;z-index:2}
+.mt span::after{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#fff;margin-left:44px;vertical-align:middle}
+.mt{display:flex;gap:44px;width:max-content;animation:mq 30s linear infinite;font-weight:700;white-space:nowrap}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media(max-width:860px){.hw{grid-template-columns:1fr}.hc{height:470px}.fc{width:180px}}
+h1{font-size:clamp(2.2rem,5.2vw,4.4rem);margin:0 0 14px;line-height:1.05}
+h1 span{background:linear-gradient(90deg,var(--ac),#ff4d6d,var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mut);font-size:1.15rem;margin:0 0 26px}
+.sb{display:flex;gap:8px;background:var(--card);padding:8px;border-radius:99px;box-shadow:0 12px 40px #0002;max-width:640px;margin:auto}
+.sb input{flex:1;min-width:0;border:0;background:none;font:inherit;padding:0 16px;color:var(--tx);outline:0}
+section{padding:70px 5%;max-width:1240px;margin:auto}
+h2{font-size:2rem;margin:0 0 26px;text-align:center}
+.tools{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin-bottom:30px}
+.chip{border:1px solid var(--ln);background:var(--card);color:var(--tx);padding:9px 18px;border-radius:99px;cursor:pointer;font:inherit;transition:.25s}
+.chip:hover{transform:translateY(-2px)}
+.chip.on{background:linear-gradient(135deg,var(--ac),#ff4d6d);color:#fff;border-color:transparent}
+select{padding:9px 14px;border-radius:99px;border:1px solid var(--ln);background:var(--card);color:var(--tx);font:inherit}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px}
+.card{background:var(--card);border-radius:22px;overflow:hidden;transition:transform .3s,box-shadow .3s;box-shadow:0 2px 12px #0001}
+.card:hover{transform:translateY(-8px);box-shadow:0 18px 40px #0003}
+.pic{height:170px;position:relative;display:grid;place-items:center;overflow:hidden}
+.pic svg{width:96px;height:96px;transition:transform .5s;filter:drop-shadow(0 8px 12px #0004)}
+.card:hover .pic svg{transform:scale(1.18) rotate(-5deg)}
+.fav{position:absolute;top:10px;right:10px;width:38px;height:38px;border-radius:50%;border:0;background:#fff9;color:#555;font-size:1.2rem;cursor:pointer;transition:.25s}
+.fav.on{background:#fff;color:#ff4d6d;animation:pop .4s}
+@keyframes pop{50%{transform:scale(1.4)}}
+.bd{padding:16px}.price{font-size:1.4rem;font-weight:800}
+.bd h3{margin:4px 0;font-size:1.02rem}.bd p{margin:0 0 12px;color:var(--mut);font-size:.88rem}
+.acts{display:flex;gap:8px}.acts .btn{flex:1;padding:10px 6px;font-size:.9rem}
+.empty{text-align:center;color:var(--mut);padding:40px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;text-align:center}
+.steps div{background:var(--card);padding:28px;border-radius:22px}
+.steps b{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 12px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;font-size:1.4rem}
+.steps p{color:var(--mut);margin:6px 0 0}
+.rv{opacity:0;transform:translateY(46px) scale(.97);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.l{transform:translateX(-60px)}.rv.r{transform:translateX(60px)}
+.rv.in{opacity:1;transform:none}
+.card.rv.in{transition:opacity .8s,transform .3s,box-shadow .3s}
+footer{text-align:center;padding:40px 5%;color:var(--mut)}
+#up{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));width:50px;height:50px;padding:0;font-size:1.3rem;opacity:0;transform:translateY(80px) scale(.5);pointer-events:none;z-index:60}
+#up.v{opacity:1;transform:none;pointer-events:auto}
+.modal{position:fixed;inset:0;background:#000a;display:none;place-items:center;z-index:100;padding:16px}
+.modal.o{display:grid}
+.box{background:var(--card);padding:26px;border-radius:24px;width:min(420px,100%);animation:pp .35s}
+@keyframes pp{from{transform:scale(.8);opacity:0}}
+.box input,.box select{width:100%;padding:12px;margin:6px 0 10px;border-radius:12px;border:1px solid var(--ln);background:var(--bg);color:var(--tx);font:inherit}
+.row{display:flex;gap:10px;justify-content:space-between}
+#toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,40px);background:var(--ac2);color:#fff;padding:12px 22px;border-radius:99px;opacity:0;transition:.4s;z-index:120;pointer-events:none;text-align:center}
+#toast.v{opacity:1;transform:translate(-50%,0)}
+.pic svg.r,.fc .pic svg.r{width:100%;height:100%;filter:none}.card:hover .pic svg.r{transform:scale(1.08)}
+.pic .fav svg{width:18px;height:18px;filter:none}.card:hover .pic .fav svg{transform:none}
+.pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.card:hover .pic img{transform:scale(1.1)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}
+.tile{border:0;cursor:pointer;border-radius:22px;padding:24px 10px;color:#fff;font:inherit;font-weight:700;display:grid;justify-items:center;gap:8px;transition:transform .3s,box-shadow .3s}
+.tile:hover{transform:translateY(-6px) scale(1.04);box-shadow:0 14px 30px #0003}.tile svg{width:64px;height:64px}
+.rev{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.rev div{background:var(--card);padding:26px;border-radius:22px}.rev p{color:var(--mut);margin:8px 0}.st{color:#f59e0b;display:flex;gap:3px}.st svg{width:18px;height:18px}
+details{background:var(--card);border-radius:16px;padding:16px 20px;margin:0 auto 12px;max-width:760px}
+summary{cursor:pointer;font-weight:600}details p{color:var(--mut);margin:10px 0 0}
+.sub{background:linear-gradient(135deg,var(--ac),#ff4d6d 55%,var(--ac2));color:#fff;border-radius:28px;padding:46px 24px;text-align:center}
+.sub h2{margin-bottom:8px}.sub .sb{margin-top:18px;color:var(--tx)}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px;text-align:left;max-width:1000px;margin:0 auto 28px}
+.fg a{display:block;color:var(--mut);text-decoration:none;margin:6px 0}.fg a:hover{color:var(--ac)}
+@media(max-width:700px){nav{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="star" viewBox="0 0 24 24"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18.1 5.5 22l1.7-7.4-5.7-5 7.5-.7z"/></symbol><symbol id="ht" viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.8-8 11-8 11z"/></symbol><symbol id="chk" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol></svg>
+<div id="bar"></div>
+<header id="hd">
+  <a class="logo" href="#top"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="7" fill="#ffb347"/><g stroke="#ff7a3d" stroke-width="2.4" stroke-linecap="round"><path d="M16 2v4M16 26v4M2 16h4M26 16h4M6 6l3 3M23 23l3 3M26 6l-3 3M9 23l-3 3"/></g></svg>Leto</a>
+  <nav><a href="#list">Объявления</a><a href="#how">Как это работает</a><a href="#faq">Вопросы</a></nav>
+  <button class="btn" onclick="openAdd()">+ Подать объявление</button>
+</header>
+
+<div class="hero" id="top">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <div class="hw">
+    <div>
+      <span class="tag">Покупай и продавай рядом с домом</span>
+      <h1>Купи. Продай.<br><span>Лето начинается здесь</span></h1>
+      <p>Тысячи вещей от людей рядом: от смартфонов до автомобилей.</p>
+      <div class="sb"><input id="q" placeholder="Что ищете? Например, велосипед"><button class="btn" onclick="go()">Найти</button></div>
+      <div id="rc" class="rc"></div>
+      <div class="qc" id="qc"></div>
+    </div>
+    <div class="hc" id="hc"></div>
+  </div>
+</div>
+<div class="mq"><div class="mt" id="mt"></div></div>
+
+<section id="cats">
+  <h2 class="rv">Популярные категории</h2>
+  <div class="tiles" id="tiles"></div>
+</section>
+
+<section id="list">
+  <h2 class="rv">Свежие объявления</h2>
+  <div class="tools rv" id="chips"></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="how">
+  <h2 class="rv">Как это работает</h2>
+  <div class="steps">
+    <div class="rv l"><b>1</b><h3>Найди</h3><p>Ищи по названию или выбирай категорию</p></div>
+    <div class="rv"><b>2</b><h3>Напиши</h3><p>Свяжись с продавцом и договорись о встрече</p></div>
+    <div class="rv r"><b>3</b><h3>Купи</h3><p>Забери вещь и оплати на месте</p></div>
+  </div>
+</section>
+
+<section class="rv" style="text-align:center">
+  <h2>Есть что продать?</h2>
+  <button class="btn" onclick="openAdd()">Подать объявление</button>
+</section>
+
+<section id="safe">
+  <h2 class="rv">Безопасные сделки</h2>
+  <div class="steps">
+    <div class="rv l"><b><svg width="26" height="26"><use href="#chk"/></svg></b><h3>Проверенные продавцы</h3><p>Профили с отзывами и рейтингом</p></div>
+    <div class="rv"><b><svg width="26" height="26"><use href="#chk"/></svg></b><h3>Встреча лично</h3><p>Осмотрите вещь и только потом платите</p></div>
+    <div class="rv"><b><svg width="26" height="26"><use href="#chk"/></svg></b><h3>Чат внутри сайта</h3><p>Не нужно светить свой номер</p></div>
+    <div class="rv r"><b><svg width="26" height="26"><use href="#chk"/></svg></b><h3>Жалобы и защита</h3><p>Подозрительные объявления удаляются</p></div>
+  </div>
+</section>
+
+<section id="rev">
+  <h2 class="rv">Что говорят пользователи</h2>
+  <div class="rev">
+    <div class="rv l"><span class="st"><svg fill="currentColor"><use href="#star"/></svg><svg fill="currentColor"><use href="#star"/></svg><svg fill="currentColor"><use href="#star"/></svg><svg fill="currentColor"><use href="#star"/></svg><svg fill="currentColor"><use href="#star"/></svg></span><p>Продала диван за один день. Сразу написали трое, выбрала самого адекватного.</p><b>Анна, Казань</b></div>
+    <div class="rv"><span class="st"><svg fill="currentColor"><use href="#star"/></svg><svg fill="currentColor"><use href="#star"/></svg><svg fill="currentColor"><use href="#star"/></svg><svg fill="currentColor"><use href="#star"/></svg><svg fill="currentColor"><use href="#star"/></svg></span><p>Купил ноутбук намного дешевле магазина. Всё как в описании, встретились у метро.</p><b>Дмитрий, Москва</b></div>
+    <div class="rv r"><span class="st"><svg fill="currentColor"><use href="#star"/></svg><svg fill="currentColor"><use href="#star"/></svg><svg fill="currentColor"><use href="#star"/></svg><svg fill="currentColor"><use href="#star"/></svg><svg style="opacity:.3" fill="currentColor"><use href="#star"/></svg></span><p>Удобный поиск и фильтры. Хотелось бы больше фото, но в целом отлично.</p><b>Ирина, Самара</b></div>
+  </div>
+</section>
+
+<section id="faq">
+  <h2 class="rv">Частые вопросы</h2>
+  <details class="rv"><summary>Как подать объявление?</summary><p>Нажмите «Подать объявление», укажите название, цену, категорию и город. Оно сразу появится в ленте.</p></details>
+  <details class="rv"><summary>Это платно?</summary><p>Размещение обычных объявлений бесплатно. Платными могут быть только продвижение и особые услуги.</p></details>
+  <details class="rv"><summary>Как безопасно купить?</summary><p>Встречайтесь в людных местах, проверяйте вещь при осмотре и не переводите предоплату незнакомым людям.</p></details>
+  <details class="rv"><summary>Можно ли изменить объявление?</summary><p>Да, в личном кабинете можно поменять цену, описание и фото или снять объявление с продажи.</p></details>
+</section>
+
+<section class="rv">
+  <div class="sub">
+    <h2>Новые объявления на почту</h2>
+    <p>Подпишитесь и узнавайте о лучших предложениях первыми</p>
+    <div class="sb"><input id="em" type="email" placeholder="Ваш e-mail"><button class="btn" onclick="sub()">Подписаться</button></div>
+  </div>
+</section>
+
+<footer>
+  <div class="fg">
+    <div><b>Leto</b><br><span>Объявления рядом с вами</span></div>
+    <div><b>Разделы</b><a href="#cats">Категории</a><a href="#list">Объявления</a><a href="#how">Как это работает</a></div>
+    <div><b>Помощь</b><a href="#faq">Вопросы</a><a href="#safe">Безопасность</a><a href="#rev">Отзывы</a></div>
+  </div>
+  © 2026 Leto · Демонстрационный сайт
+</footer>
+<button class="btn" id="up" aria-label="Наверх"><svg width="22" height="22"><use href="#up"/></svg></button>
+
+<div class="modal" id="m"><div class="box">
+  <h3 id="mt" style="margin-top:0"></h3><div id="mb"></div>
+  <div class="row"><button class="btn o" onclick="closeM()">Отмена</button><button class="btn" id="ms">Отправить</button></div>
+</div></div>
+<div id="toast"></div>
+
+<script>
+const $=id=>document.getElementById(id),fmt=n=>Number(n).toLocaleString("ru-RU")+" ₽";
+const C={auto:["Авто","#ff7a3d,#ff4d6d"],phone:["Телефоны","#14b8a6,#3b82f6"],home:["Дом","#f59e0b,#ef4444"],laptop:["Ноутбуки","#8b5cf6,#ec4899"],bike:["Спорт","#22c55e,#14b8a6"],wear:["Одежда","#f472b6,#fb923c"]};
+const I={
+auto:'<svg viewBox="0 0 64 64"><path d="M6 38l7-16h38l7 16v11H6z" fill="#fff"/><path d="M17 24h30l4 12H13z" fill="#0003"/><circle cx="19" cy="49" r="7" fill="#333"/><circle cx="45" cy="49" r="7" fill="#333"/><circle cx="19" cy="49" r="3" fill="#ddd"/><circle cx="45" cy="49" r="3" fill="#ddd"/></svg>',
+phone:'<svg viewBox="0 0 64 64"><rect x="20" y="5" width="24" height="54" rx="6" fill="#fff"/><rect x="24" y="12" width="16" height="36" rx="2" fill="#0003"/><circle cx="32" cy="54" r="2.5" fill="#0004"/></svg>',
+home:'<svg viewBox="0 0 64 64"><rect x="8" y="26" width="48" height="20" rx="6" fill="#fff"/><rect x="12" y="16" width="40" height="16" rx="6" fill="#fffd"/><rect x="6" y="30" width="10" height="20" rx="4" fill="#fff"/><rect x="48" y="30" width="10" height="20" rx="4" fill="#fff"/><path d="M14 50v6M50 50v6" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>',
+laptop:'<svg viewBox="0 0 64 64"><rect x="12" y="12" width="40" height="28" rx="3" fill="#fff"/><rect x="16" y="16" width="32" height="20" rx="1" fill="#0003"/><path d="M6 44h52l-4 8H10z" fill="#fffd"/></svg>',
+bike:'<svg viewBox="0 0 64 64"><g fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="42" r="10"/><circle cx="50" cy="42" r="10"/><path d="M14 42l10-20h16l10 20M24 22l10 20M20 16h8M40 22l-2-8h6"/></g></svg>',
+wear:'<svg viewBox="0 0 64 64"><path d="M22 8l-16 10 6 12 8-4v30h24V26l8 4 6-12L42 8c-2 6-6 8-10 8s-8-2-10-8z" fill="#fff"/></svg>'};
+const SC=(k,a,b,inner)=>`<svg class="r" viewBox="0 0 240 170" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="${k}bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="240" height="170" fill="url(#${k}bg)"/><rect y="132" width="240" height="40" fill="#000" opacity=".07"/><ellipse cx="120" cy="138" rx="92" ry="7" fill="#000" opacity=".2"/>${inner}</svg>`;
+const R={
+auto:SC("ra","#dbeafe","#bfd0e6",`<defs><linearGradient id="rab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f87171"/><stop offset="1" stop-color="#b91c1c"/></linearGradient><linearGradient id="raw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0f2fe"/><stop offset="1" stop-color="#7dd3fc"/></linearGradient></defs><path d="M26 116L28 98Q30 92 40 90L66 86L90 66Q94 62 102 62L146 62Q154 62 160 68L182 88L206 92Q216 94 218 104L218 116Z" fill="url(#rab)"/><path d="M94 84L106 68H124V84ZM130 68H148L166 84H130Z" fill="url(#raw)"/><path d="M126 86V112" stroke="#991b1b" stroke-width="1.5"/><rect x="134" y="92" width="10" height="3" rx="1.5" fill="#fecaca"/><path d="M28 110H218" stroke="#7f1d1d" stroke-opacity=".4"/><path d="M70 90L92 70L146 66" stroke="#fff" stroke-opacity=".5" stroke-width="2" fill="none"/><path d="M208 98h9q2 0 2 4v4h-11z" fill="#fef08a"/><rect x="26" y="100" width="6" height="8" rx="2" fill="#7f1d1d"/><g><circle cx="66" cy="116" r="19" fill="#0f172a"/><circle cx="66" cy="116" r="16" fill="#1f2937"/><circle cx="66" cy="116" r="10" fill="#e5e7eb"/><circle cx="66" cy="116" r="3" fill="#6b7280"/><circle cx="182" cy="116" r="19" fill="#0f172a"/><circle cx="182" cy="116" r="16" fill="#1f2937"/><circle cx="182" cy="116" r="10" fill="#e5e7eb"/><circle cx="182" cy="116" r="3" fill="#6b7280"/></g>`),
+phone:SC("rp","#e0e7ff","#c7d2fe",`<defs><linearGradient id="rpw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset=".55" stop-color="#6366f1"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs><rect x="88" y="14" width="64" height="122" rx="12" fill="#111827"/><rect x="91" y="17" width="58" height="116" rx="10" fill="url(#rpw)"/><rect x="108" y="21" width="24" height="6" rx="3" fill="#0b1020"/><text x="120" y="56" text-anchor="middle" font-size="18" font-weight="700" fill="#fff" font-family="system-ui,sans-serif">9:41</text><g fill="#fff" opacity=".85"><rect x="98" y="72" width="12" height="12" rx="4"/><rect x="114" y="72" width="12" height="12" rx="4"/><rect x="130" y="72" width="12" height="12" rx="4"/><rect x="98" y="90" width="12" height="12" rx="4"/><rect x="114" y="90" width="12" height="12" rx="4"/><rect x="130" y="90" width="12" height="12" rx="4"/><rect x="98" y="108" width="12" height="12" rx="4"/><rect x="114" y="108" width="12" height="12" rx="4"/><rect x="130" y="108" width="12" height="12" rx="4"/></g><path d="M91 17H149L91 90Z" fill="#fff" opacity=".12"/>`),
+home:SC("rh","#fef3c7","#fde2b8",`<defs><linearGradient id="rsf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8926f"/><stop offset="1" stop-color="#b85c3d"/></linearGradient></defs><rect x="40" y="52" width="160" height="50" rx="18" fill="url(#rsf)"/><rect x="46" y="58" width="72" height="38" rx="12" fill="#fff" opacity=".14"/><rect x="122" y="58" width="72" height="38" rx="12" fill="#fff" opacity=".14"/><rect x="34" y="88" width="172" height="34" rx="12" fill="url(#rsf)"/><path d="M120 90V120" stroke="#8f3f25" stroke-opacity=".5" stroke-width="2"/><rect x="18" y="66" width="30" height="62" rx="14" fill="url(#rsf)"/><rect x="192" y="66" width="30" height="62" rx="14" fill="url(#rsf)"/><rect x="34" y="126" width="8" height="10" rx="2" fill="#3b2a1a"/><rect x="198" y="126" width="8" height="10" rx="2" fill="#3b2a1a"/><rect x="56" y="70" width="30" height="30" rx="8" fill="#fde68a" transform="rotate(-10 71 85)"/>`),
+laptop:SC("rl","#ede9fe","#ddd6fe",`<defs><linearGradient id="rlw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a78bfa"/><stop offset=".6" stop-color="#f472b6"/><stop offset="1" stop-color="#fb923c"/></linearGradient><linearGradient id="rlb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#94a3b8"/></linearGradient></defs><rect x="56" y="24" width="128" height="86" rx="7" fill="#1f2937"/><rect x="62" y="30" width="116" height="74" rx="2" fill="url(#rlw)"/><circle cx="120" cy="72" r="14" fill="#fff" opacity=".85"/><path d="M62 104L98 78L124 96L146 82L178 104Z" fill="#1e1b4b" opacity=".45"/><circle cx="120" cy="27" r="1.5" fill="#4b5563"/><path d="M38 112H202L214 128Q214 133 208 133H32Q26 133 26 128Z" fill="url(#rlb)"/><rect x="100" y="120" width="40" height="6" rx="3" fill="#000" opacity=".15"/>`),
+bike:SC("rb","#dcfce7","#bbf7d0",`<g fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="62" cy="108" r="28" stroke="#1f2937" stroke-width="6"/><circle cx="62" cy="108" r="24" stroke="#94a3b8" stroke-width="1.5"/><circle cx="178" cy="108" r="28" stroke="#1f2937" stroke-width="6"/><circle cx="178" cy="108" r="24" stroke="#94a3b8" stroke-width="1.5"/><path d="M62 84v48M38 108h48M45 91l34 34M79 91l-34 34M178 84v48M154 108h48M161 91l34 34M195 91l-34 34" stroke="#cbd5e1"/><path d="M62 108H104L100 62M104 108L156 58M100 62L156 58M100 62L62 108M156 58L178 108" stroke="#16a34a" stroke-width="5"/><path d="M148 58L152 46M144 44h16" stroke="#111827" stroke-width="4"/><path d="M90 56h22" stroke="#111827" stroke-width="6"/><path d="M100 62V56" stroke="#111827" stroke-width="3"/><circle cx="104" cy="108" r="8" stroke="#64748b" stroke-width="3"/><path d="M104 108L96 120" stroke="#111827" stroke-width="4"/></g>`),
+wear:SC("rw","#fce7f3","#fbcfe8",`<defs><linearGradient id="rwj" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient></defs><path d="M84 26L56 40L30 104L56 114L68 86V136H172V86L184 114L210 104L184 40L156 26Q138 46 120 46Q102 46 84 26Z" fill="url(#rwj)"/><path d="M92 26Q120 62 148 26Q142 16 120 16Q98 16 92 26Z" fill="#1e40af"/><path d="M120 46V136" stroke="#e5e7eb" stroke-width="2.5" stroke-dasharray="3 3"/><path d="M108 44v20M132 44v20" stroke="#fff" stroke-width="2" stroke-linecap="round"/><rect x="76" y="104" width="30" height="22" rx="5" fill="#000" opacity=".16"/><rect x="134" y="104" width="30" height="22" rx="5" fill="#000" opacity=".16"/><path d="M84 26L56 40L46 66" stroke="#fff" stroke-opacity=".3" stroke-width="2" fill="none"/>`)};
+R.shoes=SC("rs","#e0f2fe","#bae6fd",`<defs><linearGradient id="rsu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient></defs><path d="M32 112V96Q32 90 40 88L70 82Q80 72 92 60H112Q120 76 140 82L176 88Q206 94 212 108V112Z" fill="url(#rsu)"/><path d="M176 88Q206 94 212 108V112H172Q176 100 176 88Z" fill="#fff" opacity=".92"/><path d="M92 60Q100 50 116 52L112 60Z" fill="#1e3a8a"/><path d="M110 66l18 8M118 70l18 8M126 74l18 8" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M60 106Q110 94 160 98" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".9"/><rect x="32" y="88" width="10" height="20" rx="3" fill="#fff" opacity=".8"/><path d="M30 112H214V118Q214 128 204 128H40Q30 128 30 118Z" fill="#f8fafc"/><path d="M34 124Q34 131 44 131H202Q212 131 212 124Z" fill="#1f2937"/><path d="M70 84L92 62" stroke="#fff" stroke-opacity=".45" stroke-width="2" fill="none"/>`);
+R.scooter=SC("rc","#dcfce7","#bbf7d0",`<path d="M44 112Q62 90 82 112" stroke="#16a34a" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="60" y="108" width="112" height="9" rx="4.5" fill="#1f2937"/><rect x="64" y="111" width="104" height="3" rx="1.5" fill="#22c55e"/><path d="M176 110L164 40" stroke="#94a3b8" stroke-width="6" stroke-linecap="round"/><path d="M176 110L190 116" stroke="#94a3b8" stroke-width="5" stroke-linecap="round"/><path d="M150 36H182" stroke="#111827" stroke-width="6" stroke-linecap="round"/><rect x="158" y="26" width="14" height="8" rx="2" fill="#0f172a"/><rect x="162" y="28" width="6" height="3" rx="1" fill="#4ade80"/><circle cx="62" cy="116" r="14" fill="#111827"/><circle cx="62" cy="116" r="8" fill="#cbd5e1"/><circle cx="62" cy="116" r="2.5" fill="#64748b"/><circle cx="190" cy="116" r="14" fill="#111827"/><circle cx="190" cy="116" r="8" fill="#cbd5e1"/><circle cx="190" cy="116" r="2.5" fill="#64748b"/><rect x="42" y="104" width="6" height="4" rx="2" fill="#ef4444"/>`);
+R.chair=SC("rk","#ccfbf1","#99f6e4",`<defs><linearGradient id="rkc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#0f766e"/></linearGradient></defs><rect x="62" y="30" width="116" height="76" rx="26" fill="url(#rkc)"/><g fill="#0f766e" opacity=".45"><circle cx="90" cy="52" r="3"/><circle cx="120" cy="52" r="3"/><circle cx="150" cy="52" r="3"/><circle cx="90" cy="74" r="3"/><circle cx="120" cy="74" r="3"/><circle cx="150" cy="74" r="3"/></g><rect x="56" y="92" width="128" height="32" rx="12" fill="url(#rkc)"/><rect x="34" y="62" width="34" height="64" rx="16" fill="url(#rkc)"/><rect x="172" y="62" width="34" height="64" rx="16" fill="url(#rkc)"/><rect x="74" y="118" width="92" height="14" rx="7" fill="#0f766e"/><rect x="42" y="124" width="7" height="10" rx="2" fill="#3b2a1a"/><rect x="191" y="124" width="7" height="10" rx="2" fill="#3b2a1a"/>`);
+let L=[
+{t:"Toyota Camry 2015, 90 000 км",p:1150000,c:"auto",g:"Москва"},
+{t:"iPhone 13, 128 ГБ, отличное",p:42000,c:"phone",g:"Санкт-Петербург"},
+{t:"Диван угловой, ткань",p:24500,c:"home",g:"Казань"},
+{t:"Ноутбук Lenovo, 16 ГБ ОЗУ",p:38900,c:"laptop",g:"Екатеринбург"},
+{t:"Горный велосипед 27.5\"",p:15900,c:"bike",g:"Краснодар"},
+{t:"Куртка зимняя, размер M",p:4200,c:"wear",g:"Новосибирск"},
+{t:"Kia Rio 2019, один хозяин",p:980000,c:"auto",g:"Самара"},
+{t:"Смартфон Samsung Galaxy S22",p:31000,c:"phone",g:"Москва"},
+{t:"Кресло-реклайнер",p:11500,c:"home",k:"chair",g:"Воронеж"},
+{t:"MacBook Air, 2020",p:56000,c:"laptop",g:"Москва"},
+{t:"Самокат электрический",p:18700,c:"bike",k:"scooter",g:"Сочи"},
+{t:"Кроссовки, новые, 42 размер",p:3900,c:"wear",k:"shoes",g:"Пермь"}
+].map((x,i)=>({...x,id:i+1,d:["сегодня","вчера","2 дня назад"][i%3]}));
+let cat="all",sort="new",F=new Set,id=100;
+$("chips").innerHTML='<button class="chip on" data-c="all">Все</button>'+Object.entries(C).map(([k,v])=>`<button class="chip" data-c="${k}">${v[0]}</button>`).join("")+'<select id="so"><option value="new">Сначала новые</option><option value="asc">Дешевле</option><option value="desc">Дороже</option></select>';
+$("chips").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;cat=b.dataset.c;document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===b));render()};
+$("so").onchange=e=>{sort=e.target.value;render()};
+$("q").oninput=()=>{if($("q").value.trim()&&cat!="all"){cat="all";document.querySelectorAll(".chip[data-c]").forEach(x=>x.classList.toggle("on",x.dataset.c=="all"))}render()};
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
+const obs=()=>document.querySelectorAll(".rv:not(.in)").forEach(e=>io.observe(e));
+function render(){
+ const q=$("q").value.trim().toLowerCase();
+ let a=L.filter(x=>(cat=="all"||x.c==cat)&&(x.t+" "+x.g+" "+C[x.c][0]).toLowerCase().includes(q));
+ if(sort=="asc")a.sort((x,y)=>x.p-y.p);if(sort=="desc")a.sort((x,y)=>y.p-x.p);
+ $("grid").innerHTML=a.length?a.map((x,i)=>`<div class="card rv" style="transition-delay:${(i%4)*.08}s"><div class="pic" style="background:linear-gradient(135deg,${C[x.c][1]})">${x.img?`<img src="${x.img}" alt="${x.t}" loading="lazy">`:(x.id==7||x.id==8?R[x.k||x.c].replace('class="r"','class="r" style="filter:hue-rotate(35deg)"'):R[x.k||x.c])}<button class="fav ${F.has(x.id)?"on":""}" onclick="tf(${x.id})" aria-label="В избранное"><svg width="18" height="18" fill="currentColor"><use href="#ht"/></svg></button></div><div class="bd"><div class="price">${fmt(x.p)}</div><h3>${x.t}</h3><p>${x.g} · ${x.d}</p><div class="acts"><button class="btn" onclick="buy(${x.id})">Купить</button><button class="btn o" onclick="buy(${x.id},1)">Написать</button></div></div></div>`).join(""):'<div class="empty">Ничего не найдено. Попробуйте другой запрос.</div>';
+ $("rc").innerHTML=q?(a.length?`Найдено: ${a.length}<a onclick="$('list').scrollIntoView()">Показать</a>`:"Ничего не найдено, попробуйте другое слово"):"";
+ obs();
+}
+function tf(i){F.has(i)?F.delete(i):F.add(i);render();toast(F.has(i)?"Добавлено в избранное":"Убрано из избранного")}
+function toast(t){const e=$("toast");e.textContent=t;e.classList.add("v");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("v"),2200)}
+function openM(t,b,cb){$("mt").textContent=t;$("mb").innerHTML=b;$("ms").onclick=cb;$("m").classList.add("o")}
+function closeM(){$("m").classList.remove("o")}
+function buy(i,msg){const x=L.find(y=>y.id==i);
+ openM((msg?"Написать продавцу: ":"Купить: ")+x.t,'<input id="n" placeholder="Ваше имя"><input id="p" placeholder="Телефон">',()=>{
+  if(!$("n").value.trim()||!$("p").value.trim())return toast("Введите имя и телефон");
+  closeM();toast(msg?"Сообщение отправлено продавцу":"Заявка отправлена! Продавец свяжется с вами")})}
+function openAdd(){openM("Новое объявление",'<input id="at" placeholder="Название"><input id="ap" type="number" min="0" placeholder="Цена, ₽"><select id="ac">'+Object.entries(C).map(([k,v])=>`<option value="${k}">${v[0]}</option>`).join("")+'</select><input id="ag" placeholder="Город">',()=>{
+  const t=$("at").value.trim(),p=$("ap").value;
+  if(!t||!p)return toast("Укажите название и цену");
+  L.unshift({id:++id,t,p:+p,c:$("ac").value,g:$("ag").value.trim()||"Не указан",d:"только что"});
+  closeM();cat="all";$("q").value="";document.querySelectorAll(".chip").forEach((x,k)=>x.classList.toggle("on",k==0));render();
+  toast("Объявление опубликовано!");$("list").scrollIntoView()})}
+$("tiles").innerHTML=Object.entries(C).map(([k,v])=>`<button class="tile rv" style="background:linear-gradient(135deg,${v[1]})" onclick="setCat('${k}')">${I[k]}${v[0]}</button>`).join("");
+function setCat(k){cat=k;document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x.dataset.c==k));render();$("list").scrollIntoView()}
+function sub(){const v=$("em").value.trim();if(!v.includes("@"))return toast("Введите корректный e-mail");$("em").value="";toast("Спасибо! Вы подписаны")}
+$("hc").innerHTML=[L[0],L[1],L[4]].map(x=>`<div class="fc"><div class="pic" style="background:linear-gradient(135deg,${C[x.c][1]})">${R[x.c]}</div><div class="bd"><div class="price">${fmt(x.p)}</div><h3>${x.t}</h3><p>${x.g}</p></div></div>`).join("");
+$("qc").innerHTML=Object.entries(C).map(([k,v])=>`<button class="chip" onclick="setCat('${k}')">${v[0]}</button>`).join("");
+const W=["Автомобили","Смартфоны","Мебель","Ноутбуки","Спорт","Одежда","Электроника","Для дома"].map(w=>"<span>"+w+"</span>").join("");
+$("mt").innerHTML=W+W+W+W;
+function go(){render();$("list").scrollIntoView()}
+$("q").onkeydown=e=>{if(e.key=="Enter")go()};
+addEventListener("scroll",()=>{
+ const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;
+ $("bar").style.width=(y/h*100)+"%";$("hd").classList.toggle("s",y>40);$("up").classList.toggle("v",y>500);
+ document.querySelector(".b1").style.marginTop=y*.25+"px";document.querySelector(".b2").style.marginBottom=y*.2+"px";
+},{passive:true});
+$("up").onclick=()=>scrollTo({top:0,behavior:"smooth"});
+render();obs();
+</script>
+</body>
+</html>
